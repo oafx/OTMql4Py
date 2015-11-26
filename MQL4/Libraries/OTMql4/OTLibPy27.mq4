@@ -85,7 +85,7 @@ int iPyInit(string sStdOut) {
 
     if (!PyIsInitialized()) {
 	vLogInit();
-        Print("iPyInit: Starting OTPy27.mqh in " +  TerminalPath());
+        Print("iPyInit: Starting OTPy27.mqh in " +  TerminalInfoString(TERMINAL_DATA_PATH));
         // Thread specific??
         if (GlobalVariableCheck("fPythonUsers") == true) {
             GlobalVariableDel("fPythonUsers");
@@ -104,10 +104,10 @@ int iPyInit(string sStdOut) {
         vPyExecuteUnicode(uArg);
 
         // we change to the metatrader directory to know where we are
-        vPyExecuteUnicode("os.chdir(os.path.join(r'" + TerminalPath() + "'))");
+        vPyExecuteUnicode("os.chdir(os.path.join(r'" + TerminalInfoString(TERMINAL_DATA_PATH) + "'))");
         // NOT uArg="sys.path.insert(0, os.getcwd())";
         // we insert the MQL4\Python directory on the sys.path
-        uArg = "sys.path.insert(0, os.path.join(r'" + TerminalPath() + "', 'MQL4', 'Python'))";
+        uArg = "sys.path.insert(0, os.path.join(r'" + TerminalInfoString(TERMINAL_DATA_PATH) + "', 'MQL4', 'Python'))";
         vPyExecuteUnicode(uArg);
         // this path should have been created on the install
         // and should have a file __init__.py in it
